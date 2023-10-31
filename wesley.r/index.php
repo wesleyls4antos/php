@@ -1,24 +1,19 @@
-<?php
-session_start();
-
-
-?>
+<!DOCTYPE html>
 <html>
-<link rel = "stylesheet" type = "text/css" href = "estile.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Segurança</title>
+</head>
 <body>
-<center><h1><br><br><br><br>Ola,
-    <?php
-        if(isset($_SESSION['nome'])== null){
-    ?>  
-        visitante<br>
-    <a href = "login.php">login</a>
-    <?php } else {
-        echo $_SESSION['nome']; ?>
-        <br><a href = "cadastro.php">cadastrar</a><br>
-        <a href = "alterar.php">Alterar Senha</a><br>
-        <a href = "sair.php">sair</a>
-        <?php } ?>
-</center>
-
+	<center>
+		<h1>SEGURANÇA NA WEB</h1>
+		<h3>Login</h3>
+		<form id="form-login" action="login.php" method="POST">
+			Login: <input type="text" name="login"><br>
+			Senha: <input type="password" name="senha"><br><br>
+			<input type="submit" name="entrar" value="Entrar">
+		</form>
+	</center>
 </body>
-</html>s
+</html>

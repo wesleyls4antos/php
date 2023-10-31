@@ -1,24 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" type = "text/css" href = "estile.css">
-    <title>Document</title>
-</head>
-<body>
-    
-<center> <h1><br><br><br><br><br><br><br>
-    <form id = "login" action = "logado.php" method = "POST">
-    Login: <input type = "text" name = "login"> 
-    <br>
-    Senha: <input type = "password" name = "senha">
-    <br>
-    <input type = "submit" name = entrar value =  "entrar">
-    <br>
+<?php
 
-</center>
-</form>
-</body>
-</html>
+include('conexao.php');
+
+$login = isset($_POST['login']) ? $_POST['login'] : '';
+$senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+
+$select = "SELECT login, senha, nivel FROM login 
+			WHERE login = '$login' AND senha = '$senha'";
+$query = mysqli_query($conexao, $select);
+$dado = mysqli_fetch_row($query);
+
+if (isset($dado[0]) == $login && isset($dado[1]) == $senha) {
+	session_start();
+	$_SESSION['login'] = $dado[0];
+	$_SESSION['nivel'] = $dado[2];
+	$_SESSION['logado'] = true;
+	header('Location: principal.php');
+} else {
+	echo '<script>alert("Usuário ou senha incorretos");
+			window.location="index.php";
+			</script>';
+}
+
+?>
